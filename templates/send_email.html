@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row pt-4">
+    <div class="col-md-8 offset-md-2">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">📧 Send Email</h4>
+            </div>
+            <div class="card-body p-4">
+                <p class="text-muted mb-4">Compose an email. The DLP system will analyze your message and attachments in real-time before it is sent.</p>
+                
+                <form action="{{ url_for('send_email') }}" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="recipient" class="form-label fw-bold">To (Email Address)</label>
+                        <input type="email" class="form-control" id="recipient" name="recipient" placeholder="recipient@example.com" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="subject" class="form-label fw-bold">Subject</label>
+                        <input type="text" class="form-control" id="subject" name="subject" placeholder="Email Subject" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="text_data" class="form-label fw-bold">Message</label>
+                        <textarea class="form-control" id="text_data" name="text_data" rows="5" placeholder="Type your message here..."></textarea>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="file_data" class="form-label fw-bold">Attachment (Optional)</label>
+                        <input type="file" class="form-control" id="file_data" name="file_data">
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            Send Email
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

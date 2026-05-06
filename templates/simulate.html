@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow border-danger">
+            <div class="card-header bg-danger text-white">
+                <h4 class="mb-0">📤 Leak Simulation / Upload</h4>
+            </div>
+            <div class="card-body p-4">
+                <p class="text-muted mb-4">Simulate an employee trying to upload a file or send a message. The system will inspect the data against stored hashes.</p>
+                
+                <form action="{{ url_for('simulate') }}" method="POST" enctype="multipart/form-data" id="simulateForm" onsubmit="showLoadingSimulate()">
+                    <div class="mb-4">
+                        <label for="file_data" class="form-label fw-bold">Upload File to Cloud</label>
+                        <input class="form-control" type="file" id="file_data" name="file_data">
+                    </div>
+                    
+                    <div class="text-center mb-3">
+                        <span class="badge bg-secondary">OR</span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="text_data" class="form-label fw-bold">Send Message / Email Body</label>
+                        <textarea class="form-control" id="text_data" name="text_data" rows="4" placeholder="Type message to send..."></textarea>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-danger btn-lg" id="simSubmitBtn">
+                            <span id="simBtnText">Submit Data</span>
+                            <span id="simSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function showLoadingSimulate() {
+    document.getElementById('simBtnText').textContent = 'Inspecting...';
+    document.getElementById('simSpinner').classList.remove('d-none');
+    document.getElementById('simSubmitBtn').disabled = true;
+}
+</script>
+{% endblock %}

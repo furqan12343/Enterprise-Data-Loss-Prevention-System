@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow">
+            <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                <h4 class="mb-0">📜 Security Logs</h4>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>ID</th>
+                                <th>Timestamp</th>
+                                <th>Action Type</th>
+                                <th>Status</th>
+                                <th>Hash Snippet</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for log in logs %}
+                            <tr>
+                                <td>{{ log.id }}</td>
+                                <td>{{ log.timestamp }}</td>
+                                <td>{{ log.action_type }}</td>
+                                <td>
+                                    {% if log.status == 'Allowed' %}
+                                        <span class="badge bg-success">{{ log.status }}</span>
+                                    {% else %}
+                                        <span class="badge bg-danger">{{ log.status }}</span>
+                                    {% endif %}
+                                </td>
+                                <td><code class="text-muted">{{ log.hash_checked }}</code></td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="5" class="text-center py-4">No records found.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

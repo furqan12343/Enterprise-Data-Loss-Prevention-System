@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">🔐 Register Sensitive Data</h4>
+            </div>
+            <div class="card-body p-4">
+                <p class="text-muted mb-4">Upload a file or enter text that you want to protect. The system will generate a SHA3-256 hash and store it in the database. The actual data will NOT be stored.</p>
+                
+                <form action="{{ url_for('register') }}" method="POST" enctype="multipart/form-data" id="registerForm" onsubmit="showLoading()">
+                    <div class="mb-4">
+                        <label for="file_data" class="form-label fw-bold">Option 1: Upload File</label>
+                        <input class="form-control" type="file" id="file_data" name="file_data">
+                    </div>
+                    
+                    <div class="text-center mb-3">
+                        <span class="badge bg-secondary">OR</span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="text_data" class="form-label fw-bold">Option 2: Enter Text</label>
+                        <textarea class="form-control" id="text_data" name="text_data" rows="4" placeholder="Enter sensitive text here..."></textarea>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg" id="submitBtn">
+                            <span id="btnText">Generate & Store Hash</span>
+                            <span id="spinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function showLoading() {
+    document.getElementById('btnText').textContent = 'Processing...';
+    document.getElementById('spinner').classList.remove('d-none');
+    document.getElementById('submitBtn').disabled = true;
+}
+</script>
+{% endblock %}
